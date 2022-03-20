@@ -2,7 +2,7 @@
 
 import logging
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, KeyboardButton
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Updater,
@@ -97,9 +97,25 @@ def block_1_button(update: Update, context: CallbackContext) -> range:
 
     query.answer()
     if variant == 'left':
-        query.edit_message_text(text=f"А ты серьезный человек, уверен, что мы найдём общий язык:-)")
+        query.edit_message_text(text=f"Отлично, с таким настроем мы с тобой быстро во всем разберемся:-)")
     else:
-        query.edit_message_text(text=f"Сделаю все возможное, чтобы тебе понравилось и было полезно! Поехали!", )
+        query.edit_message_text(text=f"Сделаю все возможное, чтобы тебе понравилось и было полезно! Поехали!")
+
+    keyboard = [
+        InlineKeyboardButton("1. Управление. Причины невыполнения задач", callback_data='1'),
+        InlineKeyboardButton("2. Уровни проф развития сотрудников", callback_data='2'),
+        InlineKeyboardButton("3. Стили руководства", callback_data='3'),
+        InlineKeyboardButton("4. Особенности управления разными типами сотрудников", callback_data='4'),
+        InlineKeyboardButton("5. Общее тестирование", callback_data='5')
+    ]
+
+    reply_markup = InlineKeyboardMarkup(inline_keyboard=[], resize_keyboard=True).from_column(button_column=keyboard)
+
+    context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text="Я рекомендую тебе открывать темы последовательно в этом порядке:",
+        reply_markup=reply_markup
+    )
 
     return ConversationHandler.END
 
