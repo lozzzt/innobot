@@ -20,13 +20,10 @@ from datetime import datetime
 conn = psycopg2.connect(database="cot", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 print("Opened database successfully")
 cur = conn.cursor()
-# today = date.today()
 today = datetime.now()
 # Enable logging
-# logging.basicConfig(
-#    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-#)
-#logger = logging.getLogger(__name__)
+# logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+# logger = logging.getLogger(__name__)
 BIO, BIO_BUTTON, BLOCK_1_BUTTON = range(3)
 
 
@@ -50,7 +47,7 @@ def bio(update: Update, context: CallbackContext) -> range:
 
     conn.commit()
 
-    update.message.reply_text('Большое спасибо! Приятно познакомиться!')
+    update.message.reply_text('Большое спасибо! Приятно познакомиться, {0}!'.format(update.message.text))
 
     keyboard = [
         [
