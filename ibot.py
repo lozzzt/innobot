@@ -16,14 +16,18 @@ from telegram.ext import (
 import psycopg2
 import datetime
 from datetime import datetime
+import yaml
 
-conn = psycopg2.connect(database="cot", user="postgres", password="postgres", host="127.0.0.1", port="5432")
+with open("config.yaml", "r") as ymlfile:
+    config = yaml.safe_load(ymlfile)
+
+db = config['DB']
+conn = psycopg2.connect(database=db['NAME'], user=db['USER'], password=db['PASSWORD'], host=db['HOST'], port=db['PORT'])
 print("Opened database successfully")
 cur = conn.cursor()
 today = datetime.now()
-# Enable logging
-# logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-# logger = logging.getLogger(__name__)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logger = logging.getLogger(__name__)
 BIO, BIO_BUTTON, BLOCK_1_BUTTON = range(3)
 
 
@@ -38,8 +42,8 @@ def start (update: Update, context: CallbackContext) -> range:
 def bio(update: Update, context: CallbackContext) -> range:
     """Stores the info about the user and ends the conversation."""
     user = update.message.from_user
-    #    name = update.message.text
-    #    logger.info("Bio of %s: %s", user.first_name, update.message.text)
+    name = update.message.text
+    logger.info("Bio of %s: %s", user.first_name, update.message.text)
 
     postgres_insert_query = """INSERT INTO clients (ID, NAME, POSITION, REG_DATE) VALUES (%s,%s,%s,%s) ON CONFLICT DO NOTHING"""
     record_to_insert = (user.id, update.message.text, 0, today)
@@ -47,7 +51,7 @@ def bio(update: Update, context: CallbackContext) -> range:
 
     conn.commit()
 
-    update.message.reply_text('Большое спасибо! Приятно познакомиться, {0}!'.format(update.message.text))
+    update.message.reply_text('Большое спасибо! Приятно познакомиться, {0}!'.format(name))
 
     keyboard = [
         [
@@ -129,7 +133,7 @@ def cancel(update: Update, context: CallbackContext) -> int:
 
 def main() -> None:
     """Run the bot. t.me/test_innotechbot"""
-    updater = Updater("5158951780:AAHl7Zt7vhaSUsYuIJCrtLvvSdZCiwY5RWA")
+    updater = Updater(config['TELEGRAM']['TOKEN'])
     dispatcher = updater.dispatcher
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
