@@ -1,13 +1,19 @@
 #!/usr/bin/python3
 import psycopg2
-conn = psycopg2.connect(database = "cot", user = "postgres", password = "postgres", host = "127.0.0.1", port = "5432")
+import yaml
+
+with open("config.yaml", "r") as ymlfile:
+    config = yaml.safe_load(ymlfile)
+
+db = config['DB']
+connect = psycopg2.connect(database=db['NAME'], user=db['USER'], password=db['PASSWORD'], host=db['HOST'], port=db['PORT'])
 print ("Opened database successfully")
 
-cur = conn.cursor()
+cur = connect.cursor()
 cur.execute('DROP TABLE IF EXISTS CLIENTS')
-conn.commit()
-cur.execute('CREATE TABLE  CLIENTS (ID TEXT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, POSITION INT NOT NULL, REG_DATE TIMESTAMP NOT NULL);')
+connect.commit()
+cur.execute('CREATE TABLE CLIENTS (ID SERIAL PRIMARY KEY, NAME TEXT NOT NULL, REG_DATE TIMESTAMP NOT NULL);')
 print ("Table created successfully")
 
-conn.commit()
-conn.close()
+connect.commit()
+connect.close()
