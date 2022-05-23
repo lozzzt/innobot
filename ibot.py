@@ -349,7 +349,7 @@ async def cmd_answer(message: types.Message):
                          reply_markup=keyboard)
 
 
-@dp.message_handler(Text(equals="Продолжить"))
+@dp.message_handler(Text(equals=["Продолжить", "2. Уровни проф развития сотрудников"]))
 async def cmd_answer(message: types.Message):
     await block_8(message)
 
@@ -525,11 +525,11 @@ async def block_12(message: types.Message):
                          "о чем говорит.")
     await asyncio.sleep(4)
     await message.answer("КАРТИНКА: Диагностика разных типов сотрудников\n"
-    "Спроси о сроках и способе выполнения – и ты услышишь…\n"
-    "Р1: ставит нереалистично короткие сроки, не может четко описать, как будет выполнять задачу, но уверен, что справится\n"
-    "Р2: отказывается от задачи, ставит непомерно большой срок выполнения, не знает, как будет выполнять\n"
-    "Р3: растягивает сроки, торгуется, очень точно и подробно описывает технологию выполнения\n"
-    "Р4: ставит оптимальный срок, описывает технологию выполнения в общих чертах.\n")
+                         "Спроси о сроках и способе выполнения – и ты услышишь…\n"
+                         "Р1: ставит нереалистично короткие сроки, не может четко описать, как будет выполнять задачу, но уверен, что справится\n"
+                         "Р2: отказывается от задачи, ставит непомерно большой срок выполнения, не знает, как будет выполнять\n"
+                         "Р3: растягивает сроки, торгуется, очень точно и подробно описывает технологию выполнения\n"
+                         "Р4: ставит оптимальный срок, описывает технологию выполнения в общих чертах.\n")
     await asyncio.sleep(6)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("Да!")
@@ -560,7 +560,7 @@ async def block_13(message: types.Message):
     keyboard.add("Р3")
     await message.answer("Сергей по настоянию руководителя прошел пару тренингов, прочитал книгу “Мама, я тимлид”, "
                          "она ему не особенно зашла. Он как не хотел никем и ничем управлять, так и не хочет. Как "
-                         "думаешь, какой тип?")
+                         "думаешь, какой тип?", reply_markup=keyboard)
 
 
 @dp.message_handler(Text(equals=["Р2", "Р3"]))
@@ -605,6 +605,303 @@ async def cmd_answer(message: types.Message):
 async def block_14(message: types.Message):
     await message.answer('ЗАДАНИЕ 1. (КАРТИНКА с Холмсом. Актер: Камбербэтч)', reply_markup=types.ReplyKeyboardRemove())
     await asyncio.sleep(1)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("➡️ Р1")
+    keyboard.add("➡️ Р2")
+    keyboard.add("➡️ Р3")
+    keyboard.add("➡️ Р4")
+    await message.answer("Шерлок Холмс по отношению к дедуктивному методу решения задач. Какой тип?",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["➡️ Р1", "➡️ Р2", "➡️ Р3"]))
+async def cmd_answer(message: types.Message):
+    await message.answer("Увы, нет. Холмс по отношению к этой задаче типичный Р4: умеет, может и хочет",
+                         reply_markup=types.ReplyKeyboardRemove())
+    await block_15(message)
+
+
+@dp.message_handler(Text(equals="➡️ Р4"))
+async def cmd_answer(message: types.Message):
+    await message.answer("Верно! Он и прекрасно умеет, и хочет решать задачи с помощью этого метода.",
+                         reply_markup=types.ReplyKeyboardRemove())
+    await block_15(message)
+
+
+async def block_15(message: types.Message):
+    await message.answer('ЗАДАНИЕ 2\n'
+                         'КАРТИНКА с Гарри Поттером')
+    await asyncio.sleep(1)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("1️⃣ Р1")
+    keyboard.add("2️⃣ Р2")
+    keyboard.add("3️⃣ Р3")
+    keyboard.add("4️⃣ Р4")
+    await message.answer("Гарри Поттер по отношению к борьбе с темными силами в 1 книге (фильме)",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["2️⃣ Р2", "3️⃣ Р3", "4️⃣ Р4"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Не соглашусь! Должной компетенцией Гарри еще точно не обладал, но при этом хотел бороться с темными силами. Он Р1.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_16(message)
+
+
+@dp.message_handler(Text(equals="1️⃣ Р1"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Я тоже так считаю. Должной компетенцией Гарри еще точно не обладал, но при этом хотел бороться с темными силами.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_16(message)
+
+
+async def block_16(message: types.Message):
+    await message.answer('ЗАДАНИЕ 3\n'
+                         'КАРТИНКА с Доктором Хаусом')
+    await asyncio.sleep(1)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("▶️ Р1")
+    keyboard.add("▶️ Р2")
+    keyboard.add("▶️ Р3")
+    keyboard.add("▶️ Р4")
+    await message.answer("Доктор Хаус по отношению к общению с пациентами по сбору анамнеза",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["▶️ Р1", "▶️ Р2", "4️⃣ Р4"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Неверно, потому что умения у него явно есть и при этом никакого желания.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_17(message)
+
+
+@dp.message_handler(Text(equals="▶️ Р3"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Да, он точно это умеет, но совершенно не горит желанием и всячески избегает.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_17(message)
+
+
+async def block_17(message: types.Message):
+    await message.answer('ЗАДАНИЕ 4\n'
+                         'КАРТИНКА с Арьей')
+    await asyncio.sleep(1)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("⏺ Р1")
+    keyboard.add("⏺ Р2")
+    keyboard.add("⏺ Р3")
+    keyboard.add("⏺️ Р4")
+    await message.answer("Арья по отношению к соблюдению правил этикета",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["⏺ Р1", "⏺ Р3", "⏺️ Р4"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Не соглашусь! Она типичный Р2: совершенно не испытывала радости от необходимости соблюдать правила этикета и не особенно стремилась их освоить",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_18(message)
+
+
+@dp.message_handler(Text(equals="⏺ Р2"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Да, согласен! Она совершенно не испытывала радости от необходимости соблюдать правила этикета и не особенно стремилась их освоить.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_18(message)
+
+
+async def block_18(message: types.Message):
+    await message.answer('ЗАДАНИЕ 5\n'
+                         'КАРТИНКА с Незнайкой')
+    await asyncio.sleep(1)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("⏹ Р1")
+    keyboard.add("⏹ Р2")
+    keyboard.add("⏹ Р3")
+    keyboard.add("⏹ Р4")
+    await message.answer("Арья по отношению к соблюдению правил этикета",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["⏹ Р1", "⏹ Р3", "⏹ Р4"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Не думаю! Скорее он Р2:  у него и не получалось, и он не горел желанием это делать.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_19(message)
+
+
+@dp.message_handler(Text(equals="⏹️ Р2"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "В точку! У него и не получалось, и он не горел желанием это делать.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_19(message)
+
+
+async def block_19(message: types.Message):
+    await asyncio.sleep(2)
+    await message.answer('Супер! Ты большой молодец, потренировался на примере известных персонажей определять уровни '
+                         'профессионального развития и заодно почти закончил еще один раздел. У тебя … верных ответов'
+                         ' из 5 возможных.')
+    await asyncio.sleep(7)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("➡️ Да!")
+    keyboard.add("➡️ Не хочется, в другой раз")
+    await message.answer("Прежде, чем ты пойдешь дальше, предлагаю тебе решить парочку проверочных кейсов и закрепить знания.",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals="➡️ Да!"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Замечательно. Это не займет больше 3-5 минут.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_20(message)
+
+
+@dp.message_handler(Text(equals="➡️ Не хочется, в другой раз"))
+async def cmd_answer(message: types.Message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("Готов продолжить!")
+    await message.answer("Хорошо, тогда жду тебя, до связи!",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals="Готов продолжить!"))
+async def cmd_answer(message: types.Message):
+    await block_20(message)
+
+
+async def block_20(message: types.Message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("🅿️1️⃣")
+    keyboard.add("🅿️2️⃣")
+    keyboard.add("🅿️3️⃣")
+    keyboard.add("🅿️4️⃣")
+    await message.answer("Вопрос 1. Александр работает в команде разработчиков меньше года и ещё ни разу не выполнил "
+                         "работу без ошибок. Попытки руководителя как-то «расшевелить» его, направив на обучение, "
+                         "не привели к успеху. Кажется, что Александр совсем пал духом. Руководитель решил сделать "
+                         "ещё одну попытку помочь ему и закрепил за ним наставника. Какой уровень профессионального "
+                         "развития у Александра?",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["🅿️1️⃣", "🅿️3️⃣", "🅿️4️⃣"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Не соглашусь! У Александра много ошибок, и он пал духом, что свидетельствует о неуверенности в себе и снижении мотивации",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_21(message)
+
+
+@dp.message_handler(Text(equals="🅿️2️⃣"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Абсолютно точно! У Александра много ошибок, и он пал духом, что свидетельствует о неуверенности в себе и снижении мотивации. ",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_21(message)
+
+
+async def block_21(message: types.Message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("🅿1")
+    keyboard.add("🅿2")
+    keyboard.add("🅿3")
+    keyboard.add("🅿4")
+    await message.answer("Вопрос 2. Если на твой вопрос, сколько тебе понадобится времени на реализацию задачи, "
+                         "сотрудник отвечает срок, который сильно короче, чем тот, который действительно нужен на ее "
+                         "выполнение, то он скорее всего кто по уровню профессионального развития в этой задаче?",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["🅿2", "🅿3", "🅿4"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Неверно! Это характерно для новичка в задаче – Р1. Именно они просят на выполнение нереалистично короткие "
+        "сроки, потому что в вопросе не разбираются, а энтузиазма, желания проявить себя и мотивации у них много",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_22(message)
+
+
+@dp.message_handler(Text(equals="🅿1"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Верно! Именно новички в задачи просят на ее выполнение нереалистично короткие сроки, потому что в вопросе не "
+        "разбираются, а энтузиазма, желания проявить себя и мотивации у них много",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_22(message)
+
+
+async def block_22(message: types.Message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("P1️⃣")
+    keyboard.add("P2️⃣")
+    keyboard.add("P3️⃣")
+    keyboard.add("P4️⃣")
+    await message.answer("Вопрос 3. Ольга, опытный сотрудник отдела, получила новое для неё задание. Выполняет работу "
+                         "с энтузиазмом, хотя испытывает серьёзные трудности и показывает низкие результаты. "
+                         "Руководителю важно, чтобы Ольга справилась с заданием. Какой уровень профессионального "
+                         "развития у Ольги?",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["P2️⃣", "P3️⃣", "P4️⃣"]))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "Не могу согласиться! У Ольги низкая компетентность, так как задние новое даже для опытного сотрудника, "
+        "высокая мотивация – выполняет работу с энтузиазмом. Значит, она Р1. ",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_23(message)
+
+
+@dp.message_handler(Text(equals="P1️⃣"))
+async def cmd_answer(message: types.Message):
+    await message.answer(
+        "В точку! Низкая компетентность, так как задние новое даже для опытного сотрудника, высокая мотивация – "
+        "выполняет работу с энтузиазмом.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await block_23(message)
+
+
+async def block_23(message: types.Message):
+    await asyncio.sleep(4)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("1")
+    keyboard.add("2")
+    keyboard.add("3")
+    keyboard.add("4")
+    keyboard.add("5")
+    await message.answer("*Праздничный стикер* Поздравляю с завершением второго блока! Как тебе? Оцени от 0 до 5",
+                         reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals=["1", "2", "3", "4", "5"]))
+async def cmd_answer(message: types.Message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("Да, продолжу!")
+    keyboard.add("Чуть позже")
+    await message.answer(
+        "Спасибо за обратную связь! Если осталось желание потренироваться и закрепить изученное, то ты всегда можешь "
+        "вернуться и перечитать теорию, потренироваться на кейсах. Готов идти в следующий раздел?",
+        reply_markup=keyboard)
+
+
+@dp.message_handler(Text(equals="Да, продолжу!"))
+async def cmd_answer(message: types.Message):
+    await message.answer("Отлично!", reply_markup=types.ReplyKeyboardRemove())
+
+
+@dp.message_handler(Text(equals="Чуть позже"))
+async def cmd_answer(message: types.Message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("Готов!")
+    await message.answer("Договорились, я на связи и жду, когда ты вернешься.", reply_markup=keyboard)
 
 
 if __name__ == "__main__":
