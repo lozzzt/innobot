@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 import logging
 from datetime import datetime
+from turtle import update
 
 import psycopg2
 import yaml
@@ -42,7 +44,7 @@ logging.basicConfig(level=logging.INFO)
 @dp.message_handler(commands="start")
 async def cmd_answer(message: types.Message):
     await Form.name.set()
-    await message.answer("Здравствуйте! Как вас зовут?")
+    await message.answer("Здравствуйте! Давайте начнем обучение!")
 
 
 @dp.message_handler(state=Form.name)
@@ -56,11 +58,11 @@ async def process_name(message: types.Message, state: FSMContext):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("Да супер")
     keyboard.add("Не удивил")
-    await message.answer('Приятно познакомиться, {0}!'.format(message.text))
+    await message.answer('Привет, {0}! Мне приятно, что ты подключился, теперь мне не так одиноко :-)'.format(message.text))
     await asyncio.sleep(1)
-    await message.answer('Меня зовут ИнноБот, я умный и веселый, а еще я много знаю про управление и очень хочу '
-                         'поделиться с тобой! Знаешь в чем моя суперсила? В том, что я на связи 24/7 и ты можешь '
-                         'поболтать со мной в любое время дня и ночи, когда будет свободная минутка! Правда, здорово?',
+    await message.answer('Меня зовут ИнноБот, я умный и весёлый, а ещё я много знаю про управление и очень хочу поделиться с тобой!'
+                         'Знаешь в чём моя суперсила? В том, что я с тобой на связи 24/7 и ты можешь поболтать со мной в любое время дня и ночи,'
+                         'когда будет свободная минутка! Правда здорово?',
                          reply_markup=keyboard)
     await state.finish()
 
@@ -117,14 +119,14 @@ async def block_2(message: types.Message):
 @dp.message_handler(Text(equals="1. Управление. Причины невыполнения задач"))
 async def cmd_answer(message: types.Message):
     await message.answer("Давай начнем с того, что обсудим, что такое управление. Я буду рассказывать просто, "
-                         "без тяжеловестных терминов", reply_markup=types.ReplyKeyboardRemove())
+                         "без тяжеловесных терминов", reply_markup=types.ReplyKeyboardRemove())
     await asyncio.sleep(3)
-    await message.answer("Управление - это деятельность над деятельностью. Тоесть управляя, руководитель не сам "
-                         "выполняет какие-либо рабочие операции, а организует работудругих людей, действует их руками")
+    await message.answer("Управление - это деятельность над деятельностью. То есть управляя, руководитель не сам "
+                         "выполняет какие-либо рабочие операции, а организует работу других людей, действует их руками")
     await asyncio.sleep(3)
     await message.answer("Конечно, иногда руководитель тоже работает как специалист, но он должен делать это только в "
                          "том случае, когда сотрудники не справляются, тогда руководитель это компенсирует. Самое "
-                         "важное помнить, чем больше ты работаешь как специалист, тем меньше управляешь!")
+                         "важное помнить: чем больше ты работаешь как специалист, тем меньше управляешь!")
     await asyncio.sleep(3)
     await message.answer("КАРТИНКА: Руководитель - это сотрудник, который выполняет задачи руками других людей")
     await asyncio.sleep(2)
@@ -134,19 +136,19 @@ async def cmd_answer(message: types.Message):
     keyboard.add("То и другое")
     await message.answer("Цель руководителя - организовать процесс выполнения задач и достижения целей. Но бывает "
                          "такое, что сотрудник не выполняет задачи, которые поставил перед ним руководитель. Как ты "
-                         "думаешь почему так происходит?", reply_markup=keyboard)
+                         "думаешь, почему так происходит?", reply_markup=keyboard)
 
 
 @dp.message_handler(Text(equals="Не мог"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Верно, но не только на самом деле сотрудник мог и не хотеть, и не понять что делать. Всего "
+    await message.answer("Верно, но не только, на самом деле сотрудник мог и не хотеть, и не понять, что делать. Всего "
                          "можно выделить 4 причины", reply_markup=types.ReplyKeyboardRemove())
     await block_3(message)
 
 
 @dp.message_handler(Text(equals="Не хотел"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Ты прав!Но это еще не все. Сотрудник мог не понять, что делать, не иметь ресурсов и так "
+    await message.answer("Ты прав! Но это еще не все. Сотрудник мог не понять, что делать, не иметь ресурсов и так "
                          "далее. Всего можно выделить 4 причины", reply_markup=types.ReplyKeyboardRemove())
     await block_3(message)
 
@@ -162,26 +164,26 @@ async def block_3(message: types.Message):
     await asyncio.sleep(1)
     await message.answer('Итак, есть 4 причины, по которым сотрудник может не выполнить поставленную перед ним '
                          'задачу: не мог, не понял, не умел, не хотел. Если твой подчиненный не выполнил задачу или '
-                         'сделал это с ненадлежайшим качеством или не в срок, проверить причины необходимо именно в '
+                         'сделал это с ненадлежащим качеством или не в срок, проверять причины необходимо именно в '
                          'этом порядке')
     await asyncio.sleep(3)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("Причем тут я?")
     keyboard.add("Понятное дело")
     await message.answer('И знаешь, что самое интересное? Если сотрудник не выполнил задачу, то в этом есть доля и '
-                         'твое управленчиской недоработки. Согласен?', reply_markup=keyboard)
+                         'твоей управленческой недоработки. Согласен?', reply_markup=keyboard)
 
 
 @dp.message_handler(Text(equals="Причем тут я?"))
 async def cmd_answer(message: types.Message):
-    await message.answer("А при том, что значит, какая-то из управленчиских функций не была реализована тобой",
+    await message.answer("А при том, что значит, какая-то из управленческих функций не была реализована тобой",
                          reply_markup=types.ReplyKeyboardRemove())
     await block_4(message)
 
 
 @dp.message_handler(Text(equals="Понятное дело"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Солидарен с тобой! Смотри на картинку и станет понятно, в чем управленчиская ошибка в "
+    await message.answer("Солидарен с тобой! Смотри на картинку, и станет понятно, в чем управленческая ошибка в "
                          "зависимости от причины невыполнения задачи",
                          reply_markup=types.ReplyKeyboardRemove())
     await block_4(message)
@@ -195,8 +197,8 @@ async def block_4(message: types.Message):
                          'Не умеет -> не реализована функция обучения\n'
                          'Не хотел -> руководитель не замотивировал')
     await asyncio.sleep(3)
-    await message.answer('Теперь ты знаешь, что нужно делать, чтобы избежать таких досадных управленчиских '
-                         'недоразумений и в разы увеличить процент выполненных задач. Для этошго нужно знать и '
+    await message.answer('Теперь ты знаешь, что нужно делать, чтобы избежать таких досадных управленческих '
+                         'недоразумений и в разы увеличить процент выполненных задач. Для этого нужно знать и '
                          'выполнять ключевые управленческие функции')
     await asyncio.sleep(3)
     await message.answer('Картинка:\n'
@@ -226,7 +228,7 @@ async def cmd_answer(message: types.Message):
                          'рамках изучаемых тем',
                          reply_markup=types.ReplyKeyboardRemove())
     await asyncio.sleep(2)
-    await message.answer('Мы с тобой узнали, что такое управление, а также о причинах невыполненных задач. Давай я '
+    await message.answer('Мы с тобой узнали, что такое управление, а также о причинах невыполнения задач. Давай я '
                          'задам тебе пару вопросов, чтобы ты мог проверить, насколько хорошо усвоил материал')
     await asyncio.sleep(3)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -259,7 +261,7 @@ async def block_5(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("➡️ Планирование")
     keyboard.add("➡️ Обучение")
-    keyboard.add("➡️ Мотивация")
+    keyboard.add("➡️ Мотивирование")
     await message.answer('Вопрос 2\n'
                          'Если для выполнения задачи руководитель выбрал сотрудника, у которго на данный момент нет '
                          'ресурса для выполнения задачи, то какую функцию он не реализовал?', reply_markup=keyboard)
@@ -267,7 +269,7 @@ async def block_5(message: types.Message):
 
 @dp.message_handler(Text(equals="➡️ Планирование"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Верно! Выбирая, кому поручить задачу, нужно всегда анлизировать, у кого есть время, "
+    await message.answer("Верно! Выбирая, кому поручить задачу, нужно всегда анализировать, у кого есть время, "
                          "силы и другие ресурсы для её выполнения, то есть планировать",
                          reply_markup=types.ReplyKeyboardRemove())
     await block_6(message)
@@ -281,7 +283,7 @@ async def cmd_answer(message: types.Message):
     await block_6(message)
 
 
-@dp.message_handler(Text(equals="➡️ Мотивация"))
+@dp.message_handler(Text(equals="➡️ Мотивирование"))
 async def cmd_answer(message: types.Message):
     await message.answer("Увы нет. Выбирая, кому поручить задачу, нужно всегда анализировать, у кого есть время, "
                          "силы и другие ресурсы для её выполнения, то есть планировать",
@@ -296,7 +298,7 @@ async def block_6(message: types.Message):
     keyboard.add("➡️ Постановка целей")
     keyboard.add("➡️ Обучение")
     await message.answer('Вопрос 3\n'
-                         'Сотрудник не понял, что именно нужно делать. Какая функция в данном случае хромает у '
+                         'Сотрудник не понял, что именно нужно делать. Какая функция в данном случае "хромает" у '
                          'руководителя?', reply_markup=keyboard)
 
 
@@ -322,7 +324,7 @@ async def cmd_answer(message: types.Message):
 
 
 async def block_7(message: types.Message):
-    await message.answer('Чтобы сотрудник понимал, что ему делать и четко видел образ конечного результат, '
+    await message.answer('Чтобы сотрудник понимал, что ему делать и четко видел образ конечного результата, '
                          'руководителю нужно грамотно ставить цели')
     await asyncio.sleep(2)
     await message.answer('Спасибо что ответил на все вопросы! И у тебя <подставить значение> правильных ответов из 3')
@@ -336,7 +338,7 @@ async def block_7(message: types.Message):
 
 @dp.message_handler(Text(equals="Да"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Отлично продолжаем!",
+    await message.answer("Отлично, продолжаем!",
                          reply_markup=types.ReplyKeyboardRemove())
     await block_8(message)
 
@@ -397,7 +399,10 @@ async def block_9(message: types.Message):
 
 @dp.message_handler(Text(equals="Конечно!"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Смайл, гифка или стикер большой палец вверх", reply_markup=types.ReplyKeyboardRemove())
+    await bot.send_animation(chat_id = message.chat.id, 
+                             reply_markup = types.ReplyKeyboardRemove(), 
+                             animation = open('media/like.gif', 'rb'),
+                             reply_markup = types.ReplyKeyboardRemove())
     await block_10(message)
 
 
@@ -470,7 +475,7 @@ async def block_11(message: types.Message):
 
 @dp.message_handler(Text(equals=["Знакомо", "Понятно, дальше!"]))
 async def cmd_answer(message: types.Message):
-    await message.answer("Стикер или смайл в ответ", reply_markup=types.ReplyKeyboardRemove())
+    await bot.send_sticker(chat_id = message.chat.id, sticker = 'CAACAgIAAxkBAAID2GKNG_WfiWu4YQ_9eZ5reBZ60yyKAALPGQACJQHASHk80OtmxE9JJAQ')
     await asyncio.sleep(1)
     await message.answer("«Р2» – это «разуверившиеся ученики», которые при первых сложностях потеряли веру в себя, "
                          "хоть и приобрели по пути немного навыков, опыта, знаний. Они вызывают или тоску (если ты "
@@ -481,7 +486,8 @@ async def cmd_answer(message: types.Message):
                          "то просят непомерно много времени. И чаще всего не могут описать технологию выполнения "
                          "задачи.")
     await asyncio.sleep(3)
-    await message.answer("Стикер типа фейспалм")
+    #отправка стикера дурачка в пижаме
+    await bot.send_sticker(chat_id = message.chat.id, sticker = 'CAACAgIAAxkBAAID1WKNGsU5BpyX5qj4LUZh4AM86ob_AAKAGAACj2rISNRGejv7n_wfJAQ')
     await asyncio.sleep(1)
     await message.answer("«Р3» полны неожиданностей: то хотят, то не хотят, то готовы взяться за задачу, то начинают "
                          "капризничать. У них масса претензий по разным поводам, поэтому их поведение часто "
@@ -603,7 +609,10 @@ async def cmd_answer(message: types.Message):
 
 
 async def block_14(message: types.Message):
-    await message.answer('ЗАДАНИЕ 1. (КАРТИНКА с Холмсом. Актер: Камбербэтч)', reply_markup=types.ReplyKeyboardRemove())
+    #await message.answer('ЗАДАНИЕ 1. (КАРТИНКА с Холмсом. Актер: Камбербэтч)', reply_markup=types.ReplyKeyboardRemove())
+    await bot.send_photo(chat_id = message.chat.id, 
+                         photo = open('media/sherlock.jpeg', 'rb'),
+                         caption = 'ЗАДАНИЕ 1.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("➡️ Р1")
@@ -629,8 +638,7 @@ async def cmd_answer(message: types.Message):
 
 
 async def block_15(message: types.Message):
-    await message.answer('ЗАДАНИЕ 2\n'
-                         'КАРТИНКА с Гарри Поттером')
+    await bot.send_photo(chat_id = message.chat.id, photo = open('media/potter.jpeg', 'rb'), caption= 'ЗАДАНИЕ 2.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("1️⃣ Р1")
@@ -658,8 +666,9 @@ async def cmd_answer(message: types.Message):
 
 
 async def block_16(message: types.Message):
-    await message.answer('ЗАДАНИЕ 3\n'
-                         'КАРТИНКА с Доктором Хаусом')
+    await bot.send_photo(chat_id = message.chat.id, 
+                         photo = open('media/houseMD.jpeg', 'rb'),
+                         caption = 'ЗАДАНИЕ 3.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("▶️ Р1")
@@ -687,8 +696,9 @@ async def cmd_answer(message: types.Message):
 
 
 async def block_17(message: types.Message):
-    await message.answer('ЗАДАНИЕ 4\n'
-                         'КАРТИНКА с Арьей')
+    await bot.send_photo(chat_id = message.chat.id, 
+                         photo = open('media/aria.jpeg', 'rb'),
+                         caption = 'ЗАДАНИЕ 4.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("⏺ Р1")
@@ -716,15 +726,16 @@ async def cmd_answer(message: types.Message):
 
 
 async def block_18(message: types.Message):
-    await message.answer('ЗАДАНИЕ 5\n'
-                         'КАРТИНКА с Незнайкой')
+    await bot.send_photo(chat_id = message.chat.id, 
+                         photo = open('media/neznaika.jpeg', 'rb'),
+                         caption = 'ЗАДАНИЕ 5.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("⏹ Р1")
     keyboard.add("⏹ Р2")
     keyboard.add("⏹ Р3")
     keyboard.add("⏹ Р4")
-    await message.answer("Арья по отношению к соблюдению правил этикета",
+    await message.answer("К какому типу относится Незнайка, который писал стихи?",
                          reply_markup=keyboard)
 
 
@@ -877,7 +888,8 @@ async def block_23(message: types.Message):
     keyboard.add("3")
     keyboard.add("4")
     keyboard.add("5")
-    await message.answer("*Праздничный стикер* Поздравляю с завершением второго блока! Как тебе? Оцени от 0 до 5",
+    await bot.send_sticker(chat_id = message.chat.id, sticker = 'CAACAgIAAxkBAAID22KNHELIQv32URs_wMjahYdBbfDxAAI4EQACe2KYScU9o5OriGzxJAQ')
+    await message.answer("Поздравляю с завершением второго блока! Как тебе? Оцени от 0 до 5",
                          reply_markup=keyboard)
 
 
