@@ -44,7 +44,7 @@ logging.basicConfig(level=logging.INFO)
 @dp.message_handler(commands="start")
 async def cmd_answer(message: types.Message):
     await Form.name.set()
-    await message.answer("Здравствуйте! Давайте начнем обучение!")
+    await message.answer("Здравствуйте! Как вас зовут?")
 
 
 @dp.message_handler(state=Form.name)
