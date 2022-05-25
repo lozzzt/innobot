@@ -401,8 +401,7 @@ async def block_9(message: types.Message):
 async def cmd_answer(message: types.Message):
     await bot.send_animation(chat_id = message.chat.id, 
                              reply_markup = types.ReplyKeyboardRemove(), 
-                             animation = open('media/like.gif', 'rb'),
-                             reply_markup = types.ReplyKeyboardRemove())
+                             animation = open('media/like.gif', 'rb'))
     await block_10(message)
 
 
