@@ -3,7 +3,6 @@
 
 import logging
 from datetime import datetime
-from turtle import update
 
 import psycopg2
 import yaml

@@ -1,8 +1,8 @@
 DB:
-  NAME: botdb
-  USER: botik
-  PASSWORD: inno+++
+  NAME: cot
+  USER: postgres
+  PASSWORD: postgres
   HOST: 127.0.0.1
   PORT: 5432
-TELEGRAM: 
-  TOKEN: '5204062166:AAGmUkBqCjDbJrpwHlMjWeuYRyylArvIuUc'
+TELEGRAM:
+  TOKEN: '5158951780:AAHl7Zt7vhaSUsYuIJCrtLvvSdZCiwY5RWA'
