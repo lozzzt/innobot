@@ -211,20 +211,20 @@ async def block_4(message: types.Message):
                          'Мотивирование\n'
                          'Обучение и развитие сотрудников')
     await asyncio.sleep(3)
-    await message.answer('Ну что ж, теперь ты знаешь какие есть функции у руководителя и какой функции нужно уделить '
+    await message.answer('Ну что ж, теперь ты знаешь, какие есть функции у руководителя и какой функции нужно уделить '
                          'больше внимания, если сотрудник не выполняет задачу')
     await asyncio.sleep(3)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("Постановка целей и задач")
     keyboard.add("Планирование")
     keyboard.add("Контроль")
-    keyboard.add("Мотивация")
-    keyboard.add("Обучение")
+    keyboard.add("Мотивирование")
+    keyboard.add("Обучение и развитие сотрудников")
     await message.answer('Хочу спросить у тебя, как ты думаешь, какую функцию необходимо прокачать именно тебе?',
                          reply_markup=keyboard)
 
 
-@dp.message_handler(Text(equals=["Постановка целей и задач", "Планирование", "Контроль", "Мотивация", "Обучение"]))
+@dp.message_handler(Text(equals=["Постановка целей и задач", "Планирование", "Контроль", "Мотивирование", "Обучение и развитие сотрудников"]))
 async def cmd_answer(message: types.Message):
     await message.answer('Спасибо, что поделился. В этом курсе мы коротко рассмотрим некоторые из этих функций в '
                          'рамках изучаемых тем',
@@ -298,7 +298,7 @@ async def block_6(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add("➡️ Контроль")
     keyboard.add("➡️ Постановка целей")
-    keyboard.add("➡️ Обучение")
+    keyboard.add("➡️ Oбучение")
     await message.answer('Вопрос 3\n'
                          'Сотрудник не понял, что именно нужно делать. Какая функция в данном случае "хромает" у '
                          'руководителя?', reply_markup=keyboard)
@@ -318,7 +318,7 @@ async def cmd_answer(message: types.Message):
     await block_7(message)
 
 
-@dp.message_handler(Text(equals="➡️ Обучение"))
+@dp.message_handler(Text(equals="➡️ Oбучение"))
 async def cmd_answer(message: types.Message):
     await message.answer("Не совсем!",
                          reply_markup=types.ReplyKeyboardRemove())
@@ -377,7 +377,7 @@ async def block_8(message: types.Message):
 
 @dp.message_handler(Text(equals="Нет конечно!"))
 async def cmd_answer(message: types.Message):
-    await message.answer("Согласен с тобой! смайл или гифка Класс", reply_markup=types.ReplyKeyboardRemove())
+    await message.answer("Согласен с тобой!👍", reply_markup=types.ReplyKeyboardRemove())
     await block_9(message)
 
 
@@ -409,6 +409,7 @@ async def cmd_answer(message: types.Message):
 
 @dp.message_handler(Text(equals="Нет, я идеален!"))
 async def cmd_answer(message: types.Message):
+    await bot.send_sticker(chat_id = message.chat.id, sticker = 'CAACAgIAAxkBAAIENmKYVBgMvSB0g1S7kAHbfTPC-4nAAAJNFgACcnfASKosAjUQ9JsZJAQ')
     await message.answer("Мне нравится твоя самооценка! Круто! И всё же даже когда все задачи ты выполняешь на "
                          "высоком уровне, есть те, которые даются сложнее.", reply_markup=types.ReplyKeyboardRemove())
     await block_10(message)
@@ -680,7 +681,7 @@ async def block_16(message: types.Message):
                          reply_markup=keyboard)
 
 
-@dp.message_handler(Text(equals=["▶️ Р1", "▶️ Р2", "4️⃣ Р4"]))
+@dp.message_handler(Text(equals=["▶️ Р1", "▶️ Р2", "▶️ Р4"]))
 async def cmd_answer(message: types.Message):
     await message.answer(
         "Неверно, потому что умения у него явно есть и при этом никакого желания.",
@@ -920,10 +921,8 @@ async def cmd_answer(message: types.Message):
 #3й раздел
 @dp.message_handler(Text(equals="3. Стили руководства"))
 async def third_chapter_answer_1(message: types.Message):
-
     await asyncio.sleep(2)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    bot.send_video(chat_id = message.chat.idmessage.chat.id, video = "https://ok.ru/video/200996426023" )
     keyboard.add("Oтлично!")
     keyboard.add("Сойдет")
     keyboard.add("Хуже некуда")
@@ -945,8 +944,6 @@ async def third_chapter_answer_2(message: types.Message):
     else :
         await message.answer("Надеюсь, что в процессе настроение улучшится.", reply_markup=keyboard)
         await third_chapter_block_1(message)
-
-
 
 async def third_chapter_block_1(message: types.Message):
     await message.answer("Ты уже знаешь, что есть 4 типа сотрудников по отношению к задаче и научился их диагностировать."
@@ -1382,9 +1379,8 @@ async def third_chapter_block_14(message: types.Message):
     await asyncio.sleep(1)
 
     #отправка видео
-    # Итак, первое видео. 
-    # Видео 1.
-    # https://ok.ru/video/200996426023
+    await bot.send_message(chat_id = message.chat.id, text="<a href='https://ok.ru/video/200996426023'>Итак, первое видео. </a>",parse_mode= types.ParseMode.HTML)
+    
     
 
     await asyncio.sleep(2)
@@ -1420,6 +1416,11 @@ async def third_chapter_block_15(message: types.Message):
     # Видео 2
     # Отряд самоубийц
     # https://ok.ru/video/833415549197
+
+    await bot.send_message(chat_id = message.chat.id, text="<a href='https://ok.ru/video/833415549197'>Видео 2 </a>",parse_mode= types.ParseMode.HTML)
+    
+
+    await bot.send_
 
     await asyncio.sleep(2)
 
