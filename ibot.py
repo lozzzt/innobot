@@ -918,6 +918,12 @@ async def cmd_answer(message: types.Message):
     await message.answer("Договорились, я на связи и жду, когда ты вернешься.", reply_markup=keyboard)
 
 
+@dp.message_handler(Text(equals="Готов!"))
+async def cmd_answer(message: types.Message):
+    await message.answer("Окей, погнали дальше",reply_markup = types.ReplyKeyboardRemove())
+    await block_2(message)
+
+
 #3й раздел
 @dp.message_handler(Text(equals="3. Стили руководства"))
 async def third_chapter_answer_1(message: types.Message):
