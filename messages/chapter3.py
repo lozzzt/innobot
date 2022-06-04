@@ -34,6 +34,7 @@ class Progress3(StatesGroup):
     msg_19 = State()
 
 def register_handlers_chapter3(dp: Dispatcher):
+    dp.register_message_handler(third_chapter_answer_1, commands="chapter3", state='*')
     dp.register_message_handler(third_chapter_answer_1, Text(equals="3. Стили руководства"))
     dp.register_message_handler(third_chapter_answer_2, Text(equals=["Хуже некуда", "Oтлично!", "Сойдет"]), state=Progress3.msg_1)
     dp.register_message_handler(to_third_chapter_block_1, Text(equals=["Готов!"]), state=Progress3.msg_2)
@@ -59,7 +60,7 @@ def register_handlers_chapter3(dp: Dispatcher):
 async def third_chapter_answer_1(message: types.Message):
     Log().getLogger().info("Chapter 3")
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Oтлично!")
     keyboard.add("Сойдет")
     keyboard.add("Хуже некуда")
@@ -70,7 +71,7 @@ async def third_chapter_answer_1(message: types.Message):
     await Progress3.msg_1.set()
 
 async def third_chapter_answer_2(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     await asyncio.sleep(1)
     if (message.text == "Хуже некуда"):
         keyboard.add("Готов!")
@@ -98,7 +99,7 @@ async def third_chapter_block_1(message: types.Message):
                         "Инструктирующие действия — это постановка задач, разъяснение сотруднику, что, "
                         "к какому сроку и как делать, обозначение точек контроля.")
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Однозначно!")
     keyboard.add("Хотелось бы пример.")
     await message.answer("Все ли тебе понятно?", reply_markup=keyboard)
@@ -127,7 +128,7 @@ async def third_chapter_block_2(message: types.Message):
 
     await asyncio.sleep(3)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Нет, все ясно!")
     keyboard.add("Кoнечно!")
     await message.answer("Привести пример?", reply_markup=keyboard)
@@ -159,7 +160,7 @@ async def third_chapter_block_3(message: types.Message):
                          "это инструктирование или  мотивирование?")
     await asyncio.sleep(2)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Мотивирующее")
     keyboard.add("Инстрyктирующее")
 
@@ -180,7 +181,7 @@ async def third_chapter_answer_5(message: types.Message):
 
 
 async def third_chapter_block_4(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Мoтивирующее")
     keyboard.add("Инструктирующeе")
     await message.answer("2. Руководитель подробно рассказал, почему эта задача интересная и перспективная для сотрудника.",
@@ -199,7 +200,7 @@ async def third_chapter_answer_6(message: types.Message):
     await third_chapter_block_5(message)
 
 async def third_chapter_block_5(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Mотивирующее")
     keyboard.add("Инструктирующеe")
     await message.answer("3. Руководитель прислал подробное описание того, что нужно сделать. ",
@@ -218,7 +219,7 @@ async def third_chapter_answer_7(message: types.Message):
     await third_chapter_block_6(message)
 
 async def third_chapter_block_6(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Мотивирующeе")
     keyboard.add("Инструктирyющее")
     await message.answer("4. Руководитель поинтересовался мнением сотрудника, какую технологию лучше выбрать для выполнения этой задачи. ",
@@ -238,7 +239,7 @@ async def third_chapter_answer_8(message: types.Message):
 
 
 async def third_chapter_block_7(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Мотивирующеe")
     keyboard.add("Инструктирующee")
     await message.answer("5. Руководитель на личном примере показал, как выполнить задачу. ",
@@ -257,7 +258,7 @@ async def third_chapter_answer_9(message: types.Message):
 
 
 async def third_chapter_block_8(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Мотивирующee")
     keyboard.add("Инструктирующее")
     await message.answer("6. Руководитель обозначил критерии достижения результата ",
@@ -329,7 +330,7 @@ async def third_chapter_block_9(message: types.Message):
 
     await asyncio.sleep(6)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Конечно, легко")
     keyboard.add("Пока не очень")
 
@@ -381,7 +382,7 @@ async def third_chapter_block_10(message: types.Message):
 
     await asyncio.sleep(3)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Инстрyктирующий")
     keyboard.add("Нaставнический")
     keyboard.add("Вoвлекающий")
@@ -405,7 +406,7 @@ async def third_chapter_answer_12(message: types.Message):
 
 async def third_chapter_block_11(message: types.Message):
     await asyncio.sleep(1)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("От настроения")
     keyboard.add("От характера руководителя")
     keyboard.add("От уровня профессионального развития сотрудника")
@@ -474,7 +475,7 @@ async def third_chapter_block_12(message: types.Message):
     #отправить гифку - хз какую
     await asyncio.sleep(3)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Дa!")
     keyboard.add("Не совсем")
 
@@ -503,7 +504,7 @@ async def third_chapter_block_13(message: types.Message):
 
     await asyncio.sleep(2)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Кoнечно")
     keyboard.add("Не сейчас")
 
@@ -533,7 +534,7 @@ async def third_chapter_block_14(message: types.Message):
 
     await asyncio.sleep(2)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Инструктирyющий")
     keyboard.add("Настaвнический")
     keyboard.add("Вовлeкающий")
@@ -569,7 +570,7 @@ async def third_chapter_block_15(message: types.Message):
     
     await asyncio.sleep(2)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Инcтруктирующий")
     keyboard.add("Наcтавнический")
     keyboard.add("Вoвлeкающий")
@@ -599,7 +600,7 @@ async def third_chapter_block_16(message: types.Message):
 
     await asyncio.sleep(2)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Инструктирующий")
     keyboard.add("Наставнический")
     keyboard.add("Вовлекающий")
@@ -635,7 +636,7 @@ async def third_chapter_block_17(message: types.Message):
 
     await asyncio.sleep(3)
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Все отлично!")
     keyboard.add("Я запутался.")
 

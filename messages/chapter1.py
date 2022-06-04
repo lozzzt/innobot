@@ -22,6 +22,7 @@ class Progress1(StatesGroup):
     msg_8 = State()
 
 def register_handlers_chapter1(dp: Dispatcher):
+    dp.register_message_handler(block2, commands="chapter1", state='*')
     dp.register_message_handler(block2, Text(equals="1. Управление. Причины невыполнения задач"))
     
     dp.register_message_handler(answer1, Text(equals="Не мог"), state=Progress1.msg_1)
@@ -63,7 +64,7 @@ async def block2(message: types.Message):
     await asyncio.sleep(3)
     await message.answer("КАРТИНКА: Руководитель - это сотрудник, который выполняет задачи руками других людей")
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Не мог")
     keyboard.add("Не хотел")
     keyboard.add("То и другое")
@@ -94,7 +95,7 @@ async def block_3(message: types.Message):
                          'сделал это с ненадлежащим качеством или не в срок, проверять причины необходимо именно в '
                          'этом порядке')
     await asyncio.sleep(3)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Причем тут я?")
     keyboard.add("Понятное дело")
     await message.answer('И знаешь, что самое интересное? Если сотрудник не выполнил задачу, то в этом есть доля и '
@@ -135,7 +136,7 @@ async def block_4(message: types.Message):
     await message.answer('Ну что ж, теперь ты знаешь, какие есть функции у руководителя и какой функции нужно уделить '
                          'больше внимания, если сотрудник не выполняет задачу')
     await asyncio.sleep(3)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Постановка целей и задач")
     keyboard.add("Планирование")
     keyboard.add("Контроль")
@@ -153,7 +154,7 @@ async def answer6(message: types.Message):
     await message.answer('Мы с тобой узнали, что такое управление, а также о причинах невыполнения задач. Давай я '
                          'задам тебе пару вопросов, чтобы ты мог проверить, насколько хорошо усвоил материал')
     await asyncio.sleep(3)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Специалист")
     keyboard.add("➡️ Руководитель")
     await message.answer('Вопрос 1\n'
@@ -178,7 +179,7 @@ async def answer8(message: types.Message):
 
 async def block_5(message: types.Message):
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Планирование")
     keyboard.add("➡️ Обучение")
     keyboard.add("➡️ Мотивирование")
@@ -208,7 +209,7 @@ async def answer11(message: types.Message):
 
 async def block_6(message: types.Message):
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Контроль")
     keyboard.add("➡️ Постановка целей")
     keyboard.add("➡️ Oбучение")
@@ -247,7 +248,7 @@ async def block_7(message: types.Message):
     await asyncio.sleep(2)
     await message.answer("Спасибо что ответил на все вопросы! И у тебя {0} {1} из 3".format(correct_answers, word))
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Да")
     keyboard.add("Вернусь позже")
     await Progress1.msg_7.set()
@@ -255,7 +256,7 @@ async def block_7(message: types.Message):
                          'развития сотрудников?', reply_markup=keyboard)
     
 async def answer16(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Продолжить")
     await Progress1.msg_8.set()
     await message.answer("Хорошо, возвращайся, я всегда на связи!",

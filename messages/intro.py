@@ -17,14 +17,25 @@ class Intro(StatesGroup):
     intro_msg_2 = State()
 
 def register_handlers_intro(dp: Dispatcher):
-    dp.register_message_handler(cmd_start, commands="start")
+    dp.register_message_handler(cmd_start, commands=['start', 'intro'], state='*')
     dp.register_message_handler(process_name, state=Intro.name)
     dp.register_message_handler(answer1, Text(equals="Не удивил"), state=Intro.intro_msg_1)
     dp.register_message_handler(answer2, Text(equals="Да супер"), state=Intro.intro_msg_1)
     dp.register_message_handler(answer3, Text(equals="Готов на все 100!"), state=Intro.intro_msg_2)
     dp.register_message_handler(answer4, Text(equals="Давай попробуем"), state=Intro.intro_msg_2)
 
+async def set_default_commands(dp):
+    await dp.bot.set_my_commands([
+        types.BotCommand("start", "Запустить бота"),
+        types.BotCommand("intro", "Вступление"),
+        types.BotCommand("chapter1", "Часть 1"),
+        types.BotCommand("chapter2", "Часть 2"),
+        types.BotCommand("chapter3", "Часть 3"),
+        types.BotCommand("chapter4", "Часть 4")
+    ])
+
 async def cmd_start(message: types.Message):
+    await set_default_commands(dp)
     Log().getLogger().info("Intro")
     await Intro.name.set()
     await message.answer("Здравствуйте! Как вас зовут?", reply_markup=types.ReplyKeyboardRemove())
@@ -38,7 +49,7 @@ async def process_name(message: types.Message):
     cur.execute(postgres_insert_query, record_to_insert)
     connect.commit()
 
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Да супер")
     keyboard.add("Не удивил")
     await message.answer('Привет, {0}! Мне приятно, что ты подключился, теперь мне не так одиноко :-)'.format(message.text))
@@ -61,7 +72,7 @@ async def answer2(message: types.Message):
     await block_1(message)
 
 async def block_1(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Готов на все 100!")
     keyboard.add("Давай попробуем")
     await asyncio.sleep(1)
@@ -83,7 +94,7 @@ async def answer4(message: types.Message, state: FSMContext):
     await block_2(message)
 
 async def block_2(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("1. Управление. Причины невыполнения задач"),
     keyboard.add("2. Уровни проф развития сотрудников"),
     keyboard.add("3. Стили руководства"),

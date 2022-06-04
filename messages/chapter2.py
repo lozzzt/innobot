@@ -39,6 +39,7 @@ class Progress2(StatesGroup):
     msg_24 = State()
 
 def register_handlers_chapter2(dp: Dispatcher):
+    dp.register_message_handler(to_chapter2, commands="chapter2", state='*')
     dp.register_message_handler(to_chapter2, Text(equals="2. Уровни проф развития сотрудников"))
     dp.register_message_handler(answer1, Text(equals="Нет конечно!"), state=Progress2.msg_1)
     dp.register_message_handler(answer2, Text(equals="Да, если он старательный"), state=Progress2.msg_1)
@@ -96,7 +97,7 @@ async def block_8(message: types.Message):
     await asyncio.sleep(3)
     await message.answer('УПР зависит от сочетания 2-х факторов: компетентности и мотивации.')
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Нет конечно!")
     keyboard.add("Да, если он старательный")
     await message.answer('Компетентность – знания и навыки,  которые нужны для выполнения конкретной задачи. Как '
@@ -114,7 +115,7 @@ async def answer2(message: types.Message):
 
 async def block_9(message: types.Message):
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Конечно!")
     keyboard.add("Нет, я идеален!")
     await message.answer('Уровень компетентности всегда привязан к КОНКРЕТНОЙ задаче. То есть сотрудник может быть '
@@ -142,7 +143,7 @@ async def block_10(message: types.Message):
     await message.answer("Мотивация – то, что побуждает человека к действиям, желание выполнить работу хорошо, "
                          "уверенности в своих возможностях и силах.")
     await asyncio.sleep(3)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Какие группы?")
     keyboard.add("Понятно")
     await message.answer('Сочетание компетентности и мотивации в разных пропорциях и составляют 4 уровня '
@@ -152,7 +153,7 @@ async def block_10(message: types.Message):
     await Progress2.msg_3.set()
 
 async def answer5(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Полезная картинка")
     keyboard.add("Ок, принято!")
     await message.answer(
@@ -180,7 +181,7 @@ async def block_11(message: types.Message):
                          "работать им не занимать! Они всегда в первых рядах: готовы браться за все, но результат "
                          "часто вызывает уныние. Он очень хочет и готов выполнять задачи, но пока не всё умеет.")
     await asyncio.sleep(5)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Знакомо")
     keyboard.add("Понятно, дальше!")
     await message.answer("Если ты спросишь у сотрудников, кто готов выполнить конкретную задачу, то он (Р1) скорее "
@@ -209,7 +210,7 @@ async def answer8(message: types.Message):
                          "капризничать. У них масса претензий по разным поводам, поэтому их поведение часто "
                          "раздражает начальника. Мотивация у них сильно хромает. Человек может, но не всегда хочет.")
     await asyncio.sleep(5)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Да, много таких")
     keyboard.add("Меня такие люди не радуют")
     await message.answer("Если его попросить “взять” задачу, он нередко начинает торговаться в стиле “А что мне за "
@@ -219,7 +220,7 @@ async def answer8(message: types.Message):
     await Progress2.msg_6.set()
 
 async def answer9(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Не то слово!")
     keyboard.add("Побольше бы таких!")
     await message.answer("Профессионалы «Р4»  способны длительное время самостоятельно выполнять сложные задания. Как "
@@ -248,7 +249,7 @@ async def block_12(message: types.Message):
                          "Р3: растягивает сроки, торгуется, очень точно и подробно описывает технологию выполнения\n"
                          "Р4: ставит оптимальный срок, описывает технологию выполнения в общих чертах.\n")
     await asyncio.sleep(6)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Да!")
     keyboard.add("Приведи пример")
     await message.answer("Все ли теперь по полочкам, все ли понятно?", reply_markup=keyboard)
@@ -268,7 +269,7 @@ async def block_13(message: types.Message):
                          "не читал ни одной книги по управлению. К какому типу его отнести? Это Р1, так как у него "
                          "много мотивации, но мало (нет) опыта.")
     await asyncio.sleep(5)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Р2")
     keyboard.add("Р3")
     await message.answer("Сергей по настоянию руководителя прошел пару тренингов, прочитал книгу “Мама, я тимлид”, "
@@ -288,7 +289,7 @@ async def answer14(message: types.Message):
     await asyncio.sleep(3)
     await message.answer("Я рассказал тебе все, что знал, о типах сотрудников! Теперь ты подкован и во всеоружии.")
     await asyncio.sleep(2)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Да")
     keyboard.add("➡️ Позже пройду")
     await message.answer("Но знать не равно уметь!  Давай потренируемся определять типы сотрудников. У меня есть "
@@ -301,7 +302,7 @@ async def answer15(message: types.Message):
     await block_14(message)
 
 async def answer16(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Продолжить")
     await message.answer("Ок, как будешь готов, возвращайся, я на связи!", reply_markup=keyboard)
     await Progress2.msg_11.set()
@@ -316,7 +317,7 @@ async def block_14(message: types.Message):
                          photo = open('media/sherlock.jpeg', 'rb'),
                          caption = 'ЗАДАНИЕ 1.')
     await asyncio.sleep(1)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Р1")
     keyboard.add("➡️ Р2")
     keyboard.add("➡️ Р3")
@@ -339,7 +340,7 @@ async def answer19(message: types.Message):
 async def block_15(message: types.Message):
     await bot.send_photo(chat_id = message.chat.id, photo = open('media/potter.jpeg', 'rb'), caption= 'ЗАДАНИЕ 2.')
     await asyncio.sleep(1)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("1️⃣ Р1")
     keyboard.add("2️⃣ Р2")
     keyboard.add("3️⃣ Р3")
@@ -366,7 +367,7 @@ async def block_16(message: types.Message):
                          photo = open('media/houseMD.jpeg', 'rb'),
                          caption = 'ЗАДАНИЕ 3.')
     await asyncio.sleep(1)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("▶️ Р1")
     keyboard.add("▶️ Р2")
     keyboard.add("▶️ Р3")
@@ -393,7 +394,7 @@ async def block_17(message: types.Message):
                          photo = open('media/aria.jpeg', 'rb'),
                          caption = 'ЗАДАНИЕ 4.')
     await asyncio.sleep(1)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("⏺ Р1")
     keyboard.add("⏺ Р2")
     keyboard.add("⏺ Р3")
@@ -420,7 +421,7 @@ async def block_18(message: types.Message):
                          photo = open('media/neznaika.jpeg', 'rb'),
                          caption = 'ЗАДАНИЕ 5.')
     await asyncio.sleep(1)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("⏹ Р1")
     keyboard.add("⏹ Р2")
     keyboard.add("⏹ Р3")
@@ -456,7 +457,7 @@ async def block_19(message: types.Message):
     await message.answer("Супер! Ты большой молодец, потренировался на примере известных персонажей определять уровни "
                         "профессионального развития и заодно почти закончил еще один раздел. У тебя {0} {1} из 5 возможных.".format(correct_answers, word))
     await asyncio.sleep(7)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("➡️ Да!")
     keyboard.add("➡️ Не хочется, в другой раз")
     await message.answer("Прежде, чем ты пойдешь дальше, предлагаю тебе решить парочку проверочных кейсов и закрепить знания.",
@@ -470,7 +471,7 @@ async def answer28(message: types.Message):
     await block_20(message)
 
 async def answer29(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Готов продолжить!")
     await message.answer("Хорошо, тогда жду тебя, до связи!",
                          reply_markup=keyboard)
@@ -480,7 +481,7 @@ async def answer29_2(message: types.Message):
     await block_20(message)
 
 async def block_20(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("🅿️1️⃣")
     keyboard.add("🅿️2️⃣")
     keyboard.add("🅿️3️⃣")
@@ -506,7 +507,7 @@ async def answer31(message: types.Message):
     await block_21(message)
 
 async def block_21(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("🅿1")
     keyboard.add("🅿2")
     keyboard.add("🅿3")
@@ -532,7 +533,7 @@ async def answer33(message: types.Message):
     await block_22(message)
 
 async def block_22(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("P1️⃣")
     keyboard.add("P2️⃣")
     keyboard.add("P3️⃣")
@@ -560,7 +561,7 @@ async def answer35(message: types.Message):
 
 async def block_23(message: types.Message):
     await asyncio.sleep(4)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("1")
     keyboard.add("2")
     keyboard.add("3")
@@ -572,7 +573,7 @@ async def block_23(message: types.Message):
     await Progress2.msg_22.set()
 
 async def answer36(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Да, продолжу!")
     keyboard.add("Чуть позже")
     await message.answer(
@@ -582,7 +583,7 @@ async def answer36(message: types.Message):
     await Progress2.msg_23.set()
 
 async def answer38(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Готов!")
     await message.answer("Договорились, я на связи и жду, когда ты вернешься.", reply_markup=keyboard)
     await Progress2.msg_24.set()
