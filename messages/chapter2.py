@@ -92,8 +92,10 @@ async def block_8(message: types.Message):
                          'о том, чем отличаются сотрудники с разным уровнем. Также мы поговорим о том, '
                          'как диагностировать этот самый уровень. Начнем!', reply_markup=types.ReplyKeyboardRemove())
     await asyncio.sleep(4)
-    await message.answer('КАРТИНКА: Уровень профессионального развития (УПР) – умение и желание сотрудника выполнить '
-                         'поставленную перед ним задачу.')
+    await bot.send_photo(chat_id = message.chat.id,
+                                 photo = open('media/upr.png', 'rb'),
+                                 caption = 'Уровень профессионального развития (УПР) – умение и желание сотрудника выполнить '
+                                                                     'поставленную перед ним задачу.')
     await asyncio.sleep(3)
     await message.answer('УПР зависит от сочетания 2-х факторов: компетентности и мотивации.')
     await asyncio.sleep(2)
@@ -242,12 +244,9 @@ async def block_12(message: types.Message):
                          "если спросишь, описывает крупноблочно, при этом ты сразу поймешь, что он знает, "
                          "о чем говорит.")
     await asyncio.sleep(4)
-    await message.answer("КАРТИНКА: Диагностика разных типов сотрудников\n"
-                         "Спроси о сроках и способе выполнения – и ты услышишь…\n"
-                         "Р1: ставит нереалистично короткие сроки, не может четко описать, как будет выполнять задачу, но уверен, что справится\n"
-                         "Р2: отказывается от задачи, ставит непомерно большой срок выполнения, не знает, как будет выполнять\n"
-                         "Р3: растягивает сроки, торгуется, очень точно и подробно описывает технологию выполнения\n"
-                         "Р4: ставит оптимальный срок, описывает технологию выполнения в общих чертах.\n")
+    await bot.send_photo(chat_id = message.chat.id,
+                                 photo = open('media/diagnostics-p1-p4.png', 'rb'),
+                                 caption = 'Диагностика разных типов сотрудников')
     await asyncio.sleep(6)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Да!")
@@ -312,9 +311,8 @@ async def answer17(message: types.Message):
 
 async def block_14(message: types.Message):
     counter.set_counter(0)
-    #await message.answer('ЗАДАНИЕ 1. (КАРТИНКА с Холмсом. Актер: Камбербэтч)', reply_markup=types.ReplyKeyboardRemove())
-    await bot.send_photo(chat_id = message.chat.id, 
-                         photo = open('media/sherlock.jpeg', 'rb'),
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/inno-sherlock.png', 'rb'),
                          caption = 'ЗАДАНИЕ 1.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -338,7 +336,7 @@ async def answer19(message: types.Message):
     await block_15(message)
 
 async def block_15(message: types.Message):
-    await bot.send_photo(chat_id = message.chat.id, photo = open('media/potter.jpeg', 'rb'), caption= 'ЗАДАНИЕ 2.')
+    await bot.send_photo(chat_id = message.chat.id, photo = open('media/inno-potter.png', 'rb'), caption= 'ЗАДАНИЕ 2.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("1️⃣ Р1")
@@ -364,7 +362,7 @@ async def answer21(message: types.Message):
 
 async def block_16(message: types.Message):
     await bot.send_photo(chat_id = message.chat.id, 
-                         photo = open('media/houseMD.jpeg', 'rb'),
+                         photo = open('media/inno-house-md.png', 'rb'),
                          caption = 'ЗАДАНИЕ 3.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -391,7 +389,7 @@ async def answer23(message: types.Message):
 
 async def block_17(message: types.Message):
     await bot.send_photo(chat_id = message.chat.id, 
-                         photo = open('media/aria.jpeg', 'rb'),
+                         photo = open('media/inno-aria.jpeg', 'rb'),
                          caption = 'ЗАДАНИЕ 4.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -418,7 +416,7 @@ async def answer25(message: types.Message):
 
 async def block_18(message: types.Message):
     await bot.send_photo(chat_id = message.chat.id, 
-                         photo = open('media/neznaika.jpeg', 'rb'),
+                         photo = open('media/inno-neznaika.png', 'rb'),
                          caption = 'ЗАДАНИЕ 5.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
