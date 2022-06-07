@@ -62,7 +62,10 @@ async def block2(message: types.Message):
                          "том случае, когда сотрудники не справляются, тогда руководитель это компенсирует. Самое "
                          "важное помнить: чем больше ты работаешь как специалист, тем меньше управляешь!")
     await asyncio.sleep(3)
-    await message.answer("КАРТИНКА: Руководитель - это сотрудник, который выполняет задачи руками других людей")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/who-is-a-leader.png', 'rb'),
+                         caption = 'Руководитель - это сотрудник, который выполняет задачи руками других людей')
+
     await asyncio.sleep(2)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Не мог")
@@ -115,23 +118,15 @@ async def answer5(message: types.Message):
 
 async def block_4(message: types.Message):
     await asyncio.sleep(1)
-    await message.answer('Картинка\n'
-                         'Не мог -> руководитель плохо запланировал\n'
-                         'Не понял -> руководитель нечетко поставил задачу\n'
-                         'Не умеет -> не реализована функция обучения\n'
-                         'Не хотел -> руководитель не замотивировал')
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/lead-emp-task-problems.png', 'rb'))
     await asyncio.sleep(3)
     await message.answer('Теперь ты знаешь, что нужно делать, чтобы избежать таких досадных управленческих '
                          'недоразумений и в разы увеличить процент выполненных задач. Для этого нужно знать и '
                          'выполнять ключевые управленческие функции')
     await asyncio.sleep(3)
-    await message.answer('Картинка:\n'
-                         'Основные функции руководителя\n'
-                         'Постановка целей и задач\n'
-                         'Планирование\n'
-                         'Контроль\n'
-                         'Мотивирование\n'
-                         'Обучение и развитие сотрудников')
+    await bot.send_photo(chat_id = message.chat.id,
+                             photo = open('media/leader-functions.png', 'rb'))
     await asyncio.sleep(3)
     await message.answer('Ну что ж, теперь ты знаешь, какие есть функции у руководителя и какой функции нужно уделить '
                          'больше внимания, если сотрудник не выполняет задачу')

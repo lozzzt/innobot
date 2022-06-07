@@ -95,9 +95,8 @@ async def third_chapter_block_1(message: types.Message):
     await message.answer("Стили складываются из комплекса действий руководителя. "
                          "Каких именно? Инструктирующих и мотивирующих (или вовлекающих). ")
     await asyncio.sleep(3)
-    await message.answer("КАРТИНКА"
-                        "Инструктирующие действия — это постановка задач, разъяснение сотруднику, что, "
-                        "к какому сроку и как делать, обозначение точек контроля.")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/instructional-actions.png', 'rb'))
     await asyncio.sleep(2)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("Однозначно!")
@@ -122,9 +121,8 @@ async def third_chapter_block_2(message: types.Message):
                          , reply_markup=types.ReplyKeyboardRemove())
     
     await asyncio.sleep(3)
-    await message.answer("КАРТИНКА "
-                         "Мотивирующие действия — стимулы, которые вовлекают сотрудника в процесс работы, повышают его желание "
-                         "работать и уверенность в собственных силах.")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/motivating-actions.png', 'rb'))
 
     await asyncio.sleep(3)
 
@@ -294,39 +292,14 @@ async def third_chapter_block_9(message: types.Message):
                          "Ты можешь сохранить картинки в галерею телефона и по необходимости обращаться к ним. ")
     await asyncio.sleep(2)
 
-    await message.answer("КАРТИНКА "
-                         "Основные инструктирующие действия "
-                         "  1.     Постановка целей и задач."
-                         "  2.     Определение критериев достижения результата."
-                         "  3.     Знакомство с должностной инструкцией (вводный инструктаж)."
-                         "  4.     Навигация на рабочем месте (разметка)."
-                         "  5.     Стандарты деятельности, критерии качества."
-                         "  6.     Рекомендация, совет."
-                         "  7.    Планирование работы, график выполнения задания."
-                         "  8.    Определение ресурсов."
-                         "  9.    Нормирование деятельности, установление сроков."
-                         " 10.   Разграничение ответственности, определение границ полномочий."
-                         " 11.   Указание / распоряжение. ")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/main-instructional-actions.png', 'rb'),
+                         caption = 'Основные инструктирующие действия')
 
     await asyncio.sleep(6)
-
-    await message.answer("КАРТИНКА "
-                         "Основные мотивирующие действия "
-                         "  1.     Похвала за прогресс."
-                         "  2.     Поощрение, награда."
-                         "  3.     Благодарность, публичное признание заслуги."
-                         "  4.     Демонстрация ценности сотрудника в глазах его близких."
-                         "  5.     Выслушивание проблем."
-                         "  6.     Личностная поддержка."
-                         "  7.     Помощь (предложение помощи)."
-                         "  8.     Повышение самооценки."
-                         "  9.     Интересоваться мнением сотрудника."
-                         "  10.    Участие сотрудника в постановке целей, принятии решения, формулировании задания."
-                         "  11.    Содействие в продвижении решений и инициатив."
-                         "  12.    Поощрение инициативы."
-                         "  13.    Возможность попробовать, разрешение риска."
-                         "  14.    «Разбор полетов», консультация."
-                         "  15.    Сделать наставником новичка.")
+    await bot.send_photo(chat_id = message.chat.id,
+                             photo = open('media/main-motivating-actions.png', 'rb'),
+                             caption = 'Основные мотивирующие действия')
 
     await asyncio.sleep(6)
 
@@ -363,22 +336,18 @@ async def third_chapter_block_10(message: types.Message):
                          "инструктирующий, наставнический, вовлекающий, делегирующий. ")
     await asyncio.sleep(4)
 
-    await message.answer("КАРТИНКА "
-                         "ИНСТРУКТИРУЮЩИЙ СТИЛЬ (С1) предполагает много инструктирующих и мало вовлекающих действий. "
-                         "НАСТАВНИЧЕСКИЙ СТИЛЬ (С2) предполагает много инструктирующих действий и много вовлекающих. "
-                         "Руководитель решает задачу вместе с сотрудником.")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/management-styles-c1-c2.png', 'rb'))
 
     await asyncio.sleep(4)
 
-    await message.answer("КАРТИНКА "
-                        "ВОВЛЕКАЮЩИЙ СТИЛЬ  (С3) предполагает мало инструктирующих и много вовлекающих действий. "
-                        "Руководитель мотивирует подчинённого к решению задачи, вовлекая его в принятие решений. "      
-                        "ДЕЛЕГИРУЮЩИЙ СТИЛЬ  (С4): мало как инструктирующих, так и вовлекающих действий. "
-                        "Руководитель делегирует подчиненному ответственность за принятие решений и достижение результатов. ")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/management-styles-c3-c4.png', 'rb'))
 
     await asyncio.sleep(6)
 
-    await message.answer("КАРТИНКА с 4 стилями * дополнительно запросить у Инны*")
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/management-styles-c1-c2-c3-c4.png', 'rb'))
 
     await asyncio.sleep(3)
 
