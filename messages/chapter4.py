@@ -116,7 +116,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
         asyncio.sleep(1)
 
         if(message.text == "Да, предельно"):
-            await message.answer("Так держать! *Смайл большой палец вверх", reply_markup=types.ReplyKeyboardRemove())
+            await message.answer("Так держать! 👍", reply_markup=types.ReplyKeyboardRemove())
         else:
             await message.answer("Хорошо, идем дальше!", reply_markup=types.ReplyKeyboardRemove())
 
