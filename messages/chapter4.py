@@ -51,7 +51,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
 
     await Progress4.msg_1.set()
 
-    async def fourth_chapter_answer_1(message: types.Message):
+async def fourth_chapter_answer_1(message: types.Message):
         await asyncio.sleep(1)
         if(message.text == "Да, не терпится!"):
             await message.answer("Уже начинаем", reply_markup=types.ReplyKeyboardRemove())
@@ -62,7 +62,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
 
         await fourth_chapter_block_1(message)
 
-    async def fourth_chapter_block_1(message: types.Message):
+async def fourth_chapter_block_1(message: types.Message):
         await asyncio.sleep(1)
         await message.answer("Начнем с постановки целей разным типам сотрудников. "
                              "Самое главное правило: ставя цели, учитывай УПР (уровень профессионального развития) сотрудников. А теперь ближе к делу.  "
@@ -112,7 +112,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
         await Progress4.msg_2.set()
 
 
-    async def fourth_chapter_answer_2(message: types.Message):
+async def fourth_chapter_answer_2(message: types.Message):
         asyncio.sleep(1)
 
         if(message.text == "Да, предельно"):
@@ -122,7 +122,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
 
         await fourth_chapter_block_2(message)
 
-    async def fourth_chapter_block_2(message: types.Message):
+async def fourth_chapter_block_2(message: types.Message):
         await asyncio.sleep(2)
 
         await message.answer("У Р3 – сотрудника  с переменной мотивацией и высокой компетентностью -  стоит спросить, как бы он выполнил эту задачу, "
@@ -149,7 +149,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
         await Progress4.msg_3.set()
 
 
-    async def fourth_chapter_answer_3(message: types.Message):
+async def fourth_chapter_answer_3(message: types.Message):
         await asyncio.sleep(1)
 
         await message.answer("Р4 с энтузиазмом примется за сложную, интересную задачу, если ему предоставить свободу действий. "
@@ -176,7 +176,7 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
 
         await Progress4.msg_4.set()
 
-    async def fourth_chapter_answer_4(message: types.Message):
+async def fourth_chapter_answer_4(message: types.Message):
         await asyncio.sleep(1)
 
         if(message.text == "Конечно!"):
@@ -186,9 +186,9 @@ async def fourth_chapter_welcome(message: types.Message, state: FSMContext):
     
         await  fourth_chapter_block_3(message)
 
-    async def fourth_chapter_block_3(messages: types.Message):
-        await asyncio.sleep(1)
+async def fourth_chapter_block_3(message: types.Message):
+    await asyncio.sleep(1)
 
-        await message.answer("SMART – это метод описания цели, включающий в себя: конкретность, измеримость, достижимость, важность и определённость по срокам. "
+    await message.answer("SMART – это метод описания цели, включающий в себя: конкретность, измеримость, достижимость, важность и определённость по срокам. "
                              , reply_markup=types.ReplyKeyboardRemove())
 
