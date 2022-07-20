@@ -75,8 +75,8 @@ def register_handlers_chapter2(dp: Dispatcher):
     dp.register_message_handler(answer31, Text(equals="🅿️2️⃣"), state=Progress2.msg_19)
     dp.register_message_handler(answer32, Text(equals=["🅿2", "🅿3", "🅿4"]), state=Progress2.msg_20)
     dp.register_message_handler(answer33, Text(equals="🅿1"), state=Progress2.msg_20)
-    dp.register_message_handler(answer34, Text(equals=["P2️⃣", "P3️⃣", "P4️⃣"]), state=Progress2.msg_21)
-    dp.register_message_handler(answer35, Text(equals="P1️⃣"), state=Progress2.msg_21)
+    dp.register_message_handler(answer34, Text(equals=["🅿2️⃣", "🅿3️⃣", "🅿4️⃣"]), state=Progress2.msg_21)
+    dp.register_message_handler(answer35, Text(equals="🅿1️⃣"), state=Progress2.msg_21)
     dp.register_message_handler(answer36, Text(equals=["1", "2", "3", "4", "5"]), state=Progress2.msg_22)
     dp.register_message_handler(answer37, Text(equals="Да, продолжу!"), state=Progress2.msg_23)
     dp.register_message_handler(answer38, Text(equals="Чуть позже"), state=Progress2.msg_23)
@@ -163,7 +163,12 @@ async def answer5(message: types.Message):
         'Р1 (новичок) – высокая мотивация, низкая компетентность;\n'
         'Р2 (разуверившийся ученик) – низкая мотивация, низкая (или умеренная) компетентность;\n'
         'Р3 (специалист) – переменная мотивация, высокая компетентность;\n'
-        'Р4 (профессионал) – высокая мотивация, высокая компетентность.', reply_markup=keyboard)
+        'Р4 (профессионал) – высокая мотивация, высокая компетентность.')
+    await asyncio.sleep(1)
+    await bot.send_photo(chat_id = message.chat.id,
+                         photo = open('media/4-pro-types-p1-p4.png', 'rb'),
+                         caption = '4 типа сотрудников', 
+                         reply_markup=keyboard)
     await Progress2.msg_4.set()
 
 async def answer6(message: types.Message):
@@ -389,7 +394,7 @@ async def answer23(message: types.Message):
 
 async def block_17(message: types.Message):
     await bot.send_photo(chat_id = message.chat.id, 
-                         photo = open('media/inno-aria.jpeg', 'rb'),
+                         photo = open('media/inno-aria.png', 'rb'),
                          caption = 'ЗАДАНИЕ 4.')
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -525,17 +530,17 @@ async def answer32(message: types.Message):
 
 async def answer33(message: types.Message):
     await message.answer(
-        "Верно! Именно новички в задачи просят на ее выполнение нереалистично короткие сроки, потому что в вопросе не "
+        "Верно! Именно новички в задаче просят на ее выполнение нереалистично короткие сроки, потому что в вопросе не "
         "разбираются, а энтузиазма, желания проявить себя и мотивации у них много",
         reply_markup=types.ReplyKeyboardRemove())
     await block_22(message)
 
 async def block_22(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-    keyboard.add("P1️⃣")
-    keyboard.add("P2️⃣")
-    keyboard.add("P3️⃣")
-    keyboard.add("P4️⃣")
+    keyboard.add("🅿1️⃣")
+    keyboard.add("🅿2️⃣")
+    keyboard.add("🅿3️⃣")
+    keyboard.add("🅿4️⃣")
     await message.answer("Вопрос 3. Ольга, опытный сотрудник отдела, получила новое для неё задание. Выполняет работу "
                          "с энтузиазмом, хотя испытывает серьёзные трудности и показывает низкие результаты. "
                          "Руководителю важно, чтобы Ольга справилась с заданием. Какой уровень профессионального "
