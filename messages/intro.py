@@ -31,7 +31,8 @@ async def set_default_commands(dp):
         types.BotCommand("chapter1", "Часть 1"),
         types.BotCommand("chapter2", "Часть 2"),
         types.BotCommand("chapter3", "Часть 3"),
-        types.BotCommand("chapter4", "Часть 4")
+        types.BotCommand("chapter4", "Часть 4"),
+        types.BotCommand("chapter5", "Общее тестирование")
     ])
 
 async def cmd_start(message: types.Message):

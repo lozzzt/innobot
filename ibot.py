@@ -8,6 +8,7 @@ from messages.chapter1 import *
 from messages.chapter2 import *
 from messages.chapter3 import *
 from messages.chapter4 import *
+from messages.chapter5 import *
 
 if __name__ == "__main__":
       
@@ -17,4 +18,5 @@ if __name__ == "__main__":
     register_handlers_chapter2(dp)
     register_handlers_chapter3(dp)
     register_handlers_chapter4(dp)
+    register_handlers_chapter5(dp)
     executor.start_polling(dp, skip_updates=True)
