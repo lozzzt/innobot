@@ -75,7 +75,7 @@ async def third_chapter_answer_2(message: types.Message):
     await asyncio.sleep(1)
     if (message.text == "Хуже некуда"):
         keyboard.add("Готов!")
-        await message.answer("Договорились, я на связи и жду, когда ты вернешься.", reply_markup=keyboard)
+        await message.answer("Может, чашечку кофе и потом продолжим? Я всегда на связи и буду ждать.", reply_markup=keyboard)
         await Progress3.msg_2.set()
     elif (message.text == "Oтлично!"):
         await message.answer("Вот и хорошо, тогда приступим.", reply_markup=keyboard)
@@ -609,7 +609,7 @@ async def third_chapter_block_17(message: types.Message):
     keyboard.add("Все отлично!")
     keyboard.add("Я запутался.")
 
-    await message.answer("Какой это стиль? ", reply_markup=keyboard)
+    await message.answer("Ура! Ты уже прошел большую часть курса! Как ты? Все хорошо?", reply_markup=keyboard)
     await Progress3.msg_19.set()
 
 async def third_chapter_answer_19(message: types.Message, state: FSMContext):
@@ -617,5 +617,5 @@ async def third_chapter_answer_19(message: types.Message, state: FSMContext):
     await state.finish()
     await message.answer("Спасибо за обратную связь! Если осталось желание потренироваться и закрепить изученное, то "
                          "ты всегда можешь вернуться и перечитать теорию, потренироваться на кейсах. ", reply_markup=types.ReplyKeyboardRemove())
-    # from messages.chapter4 import fourth_chapter_welcome
-    # await fourth_chapter_welcome(message)
+    from messages.chapter4 import fourth_chapter_welcome
+    await fourth_chapter_welcome(message, state)
