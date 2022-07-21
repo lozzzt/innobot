@@ -426,7 +426,7 @@ async def block_18(message: types.Message):
     await asyncio.sleep(1)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     keyboard.add("⏹ Р1")
-    keyboard.add("⏹ Р2")
+    keyboard.add("⏹️ Р2")
     keyboard.add("⏹ Р3")
     keyboard.add("⏹ Р4")
     await message.answer("К какому типу относится Незнайка, который писал стихи?",
